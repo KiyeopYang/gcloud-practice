@@ -32,7 +32,7 @@ apt-get install -yq ca-certificates git nodejs build-essential supervisor
 
 # Install nodejs
 mkdir /opt/nodejs
-curl https://nodejs.org/dist/v4.2.2/node-v4.2.2-linux-x64.tar.gz | tar xvzf - -C /opt/nodejs --strip-components=1
+curl https://nodejs.org/dist/v8.9.4/node-v8.9.4-linux-x64.tar.gz | tar xvzf - -C /opt/nodejs --strip-components=1
 ln -s /opt/nodejs/bin/node /usr/bin/node
 ln -s /opt/nodejs/bin/npm /usr/bin/npm
 
@@ -40,10 +40,10 @@ ln -s /opt/nodejs/bin/npm /usr/bin/npm
 # git requires $HOME and it's not set during the startup script.
 export HOME=/root
 git config --global credential.helper gcloud.sh
-git clone https://source.developers.google.com/p/$PROJECTID /opt/app
+git clone https://github.com/KiyeopYang/gcloud-practice.git /opt/app
 
 # Install app dependencies
-cd /opt/app/7-gce
+cd /opt/app
 npm install
 
 # Create a nodeapp user. The application will run as this user.
@@ -53,7 +53,7 @@ chown -R nodeapp:nodeapp /opt/app
 # Configure supervisor to run the node app.
 cat >/etc/supervisor/conf.d/node-app.conf << EOF
 [program:nodeapp]
-directory=/opt/app/7-gce
+directory=/opt/app
 command=npm start
 autostart=true
 autorestart=true
