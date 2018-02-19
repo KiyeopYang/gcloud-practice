@@ -5,7 +5,7 @@
   "repository": "https://github.com/GoogleCloudPlatform/nodejs-getting-started",
   "private": true,
   "scripts": {
-    "start": "node app.js",
+    "start": "node ${SCRIPT:-app.js}",
     "test": "repo-tools test app && ava -t 30s --tap test/*.test.js",
     "e2e": "repo-tools test deploy && repo-tools test deploy --yaml worker.yaml && E2E_TESTS=True ava -t 30s --tap test/*.test.js",
     "cover": "nyc --cache npm test; nyc report --reporter=html",
